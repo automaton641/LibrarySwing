@@ -1,5 +1,6 @@
 package automaton641.lib;
 
+import automaton641.lib.LibMouseEvent.LibMouseEventType;
 import java.awt.Graphics;
 import javax.swing.JComponent;
 import java.awt.Color;
@@ -7,6 +8,7 @@ import java.awt.Font;
 import java.awt.FontMetrics;
 import java.awt.RenderingHints;
 import java.awt.Graphics2D;
+import java.awt.event.MouseEvent;
 
 public class LibCanvas extends JComponent {
     private FontMetrics metrics;
@@ -26,6 +28,15 @@ public class LibCanvas extends JComponent {
         clear(graphics);
         draw(graphics);
     }
+
+    public void mousePressed(MouseEvent event) {
+        container.event(LibEvent.fromMouseEvent(event, LibMouseEventType.Pressed));
+    }
+
+    public void mouseReleased(MouseEvent event) {
+        container.event(LibEvent.fromMouseEvent(event, LibMouseEventType.Released));
+    }
+
 
     private void setAntialiasing(Graphics graphics) {
         Graphics2D graphics2D = (Graphics2D)graphics;

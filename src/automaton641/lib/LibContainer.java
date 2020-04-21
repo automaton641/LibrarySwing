@@ -15,6 +15,12 @@ public class LibContainer extends LibVisual {
     public LibContainer(LibCanvas canvas, LibTheme theme, double growRatio) {
         super(canvas, theme, growRatio);
     }
+    public void event(LibEvent event) {
+        super.event(event);
+        for (LibVisual visual : visuals) {
+            visual.event(event);
+        }
+    }
     public void setFlow(Flow flow) {
         this.flow = flow;
     }

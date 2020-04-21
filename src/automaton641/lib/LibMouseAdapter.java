@@ -6,10 +6,14 @@ import java.awt.event.MouseEvent;
 public class LibMouseAdapter extends MouseAdapter {
     @Override
     public void mousePressed(MouseEvent event) {
-        LibTerminal.printLine("event: " + event.getPoint());
+        LibCanvas canvas = (LibCanvas)event.getSource();
+        canvas.mousePressed(event);
+
     }
+    @Override
     public void mouseReleased(MouseEvent event) {
-        LibTerminal.printLine("event: " + event.getPoint());
+        LibCanvas canvas = (LibCanvas)event.getSource();
+        canvas.mouseReleased(event);
     }
 
 }

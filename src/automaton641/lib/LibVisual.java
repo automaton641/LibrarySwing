@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 
 public class LibVisual {
+
 	protected static int count = 0;
     protected LibContainer container = null;
     protected LibTheme theme = null;
@@ -17,12 +18,24 @@ public class LibVisual {
     protected LibSize size = new LibSize(0.0, 0.0);
     protected LibSize availableSize = new LibSize(0.0, 0.0);
     protected LibPosition position = new LibPosition(0.0, 0.0);
+	protected LibEventListener eventListener = null;
+	protected LibEventListener internalEventListener = null;
+
     public LibVisual(LibCanvas canvas, LibTheme theme, double growRatio) {
     	id = count;
     	count++;
     	this.canvas = canvas;
         this.theme = theme;
         this.growRatio = growRatio;
+    }
+
+	public void event(LibEvent event) {
+		if (internalEventListener != null) {
+			internalEventListener.event(event);
+		}
+        if (eventListener != null) {
+			eventListener.event(event);
+		}
     }
 
     public void revalidate(LibSize size, LibPosition position) {
@@ -42,6 +55,11 @@ public class LibVisual {
         graphics.setColor(color);
         graphics.fillRect(x, y, width, height);
     }
+
+	public void addEventListener(LibEventListener eventListener) {
+		this.eventListener = eventListener;
+	}
+
     public void draw(Graphics graphics) {
         drawBorder(graphics);
         drawMargin(graphics);
